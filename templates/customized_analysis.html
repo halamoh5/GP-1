@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customized Analysis</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 700px;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Customized Analysis</h3>
+        <form action="/customized-analysis" method="POST">
+            <label for="time_period">Select Time Period (Optional):</label><br>
+            <input type="date" id="time_period" name="time_period">
+            <br><br>
+
+            <label for="location">Select Location (Optional):</label><br>
+            <input type="text" id="location" name="location" placeholder="Enter Location">
+            <br><br>
+
+            <label for="interest">List of Interest (Optional):</label><br>
+            <select id="interest" name="interest">
+                <option value="">Select Interest</option>
+                <option value="activity">Activity</option>
+                <option value="location">Location</option>
+                <option value="time">Time</option>
+            </select>
+            <br><br>
+
+            <button type="submit">Submit for Analysis</button>
+        </form>
+    </div>
+</body>
+</html>

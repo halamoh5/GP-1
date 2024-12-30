@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1e1e1e;
+            color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ffcc00;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .slot {
+            background: #2e2e2e;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+
+        .slot h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #ffcc00;
+        }
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #00bcd4;
+            color: #1e1e1e;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.5);
+        }
+
+        .circle span {
+            font-size: 2em;
+        }
+
+        @media (max-width: 768px) {
+            .circle {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Analysis Result Dashboard</h1>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="slot">
+            <h3>Contacts</h3>
+            <div class="circle" onclick="window.location.href='/analysis-result?category=contacts'">
+                <span>{{ percentages.contacts|round(0) }}%</span>
+            </div>
+        </div>
+
+        <div class="slot">
+            <h3>Call Logs</h3>
+            <div class="circle" onclick="window.location.href='/analysis-result?category=calllogs'">
+                <span>{{ percentages.calllogs|round(0) }}%</span>
+            </div>
+        </div>
+
+        <div class="slot">
+            <h3>Wi-Fi</h3>
+            <div class="circle" onclick="window.location.href='/analysis-result?category=wifi'">
+                <span>{{ percentages.wifi|round(0) }}%</span>
+            </div>
+        </div>
+
+        <div class="slot">
+            <h3>Images</h3>
+            <div class="circle" onclick="window.location.href='/analysis-result?category=images'">
+                <span>{{ percentages.images|round(0) }}%</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+network={
+    ssid="Home"
+    psk="home_4321"
+}

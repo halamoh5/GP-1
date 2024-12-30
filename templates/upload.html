@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your File</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1e1e1e;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 90%;
+            padding: 40px;
+            background: #2e2e2e;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            background: #333;
+            color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #00bcd4;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #008c9e;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .file-list {
+            margin-top: 10px;
+            list-style-type: none;
+            padding: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+            color: #f0f0f0;
+        }
+
+        .file-list li {
+            padding: 8px;
+            margin: 4px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+
+        .file-list button {
+            background: none;
+            color: #ffcc00;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .file-list button:hover {
+            color: #fff;
+        }
+
+        .error {
+            background: #ff0000;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .analysis-results {
+            margin-top: 20px;
+        }
+
+        .analysis-results h3 {
+            color: #00bcd4;
+        }
+
+        .analysis-results ul {
+            list-style-type: none;
+            padding: 0;
+            color: #ffcc00;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Upload Your Data</h3>
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="zipfiles" accept=".zip" required multiple id="fileInput">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="error" id="errorMessage" style="display:none;">
+            <p><strong>Error:</strong> Please upload at least two files to proceed.</p>
+        </div>
+
+        <h4>Selected Files:</h4>
+        <ul id="fileList" class="file-list"></ul>
+        <p id="fileCount">Files selected: 0</p>
+
+        <div class="analysis-results" id="resultsContainer" style="display:none;">
+            <h3>Analysis Results</h3>
+            <div id="commonNumbers">
+                <h4>Common Phone Numbers:</h4>
+                <ul></ul>
+            </div>
+            <div id="interestMatches">
+                <h4>Matches with List of Interest:</h4>
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+        const fileInput = document.querySelector('#fileInput');
+        const fileList = document.querySelector('#fileList');
+        const fileCount = document.querySelector('#fileCount');
+        const errorMessage = document.getElementById('errorMessage');
+
+        fileInput.addEventListener('change', function () {
+            const files = Array.from(fileInput.files);
+            selectedFiles = [...selectedFiles, ...files];
+            updateFileDisplay();
+        });
+
+        function updateFileDisplay() {
+            fileList.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = file.name;
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.onclick = function () {
+                    selectedFiles.splice(index, 1);
+                    updateFileDisplay();
+                };
+                listItem.appendChild(removeButton);
+                fileList.appendChild(listItem);
+            });
+            fileCount.textContent = `Files selected: ${selectedFiles.length}`;
+        }
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (selectedFiles.length < 1) {
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            const dataTransfer = new DataTransfer();
+            selectedFiles.forEach((file) => dataTransfer.items.add(file));
+            fileInput.files = dataTransfer.files;
+
+            this.submit();
+        });
+
+        document.querySelector('#uploadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (selectedFiles.length < 2) {
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('db1', selectedFiles[0]);
+            formData.append('db2', selectedFiles[1]);
+
+            fetch('/general_analysis', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        function displayResults(data) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const commonNumbersList = document.getElementById('commonNumbers').querySelector('ul');
+            const interestMatchesList = document.getElementById('interestMatches').querySelector('ul');
+
+            resultsContainer.style.display = 'block';
+            commonNumbersList.innerHTML = '';
+            interestMatchesList.innerHTML = '';
+
+            data.common_numbers.forEach(number => {
+                const listItem = document.createElement('li');
+                listItem.textContent = number;
+                commonNumbersList.appendChild(listItem);
+            });
+
+            data.interest_matches.forEach(match => {
+                const listItem = document.createElement('li');
+                listItem.textContent = match;
+                interestMatchesList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+network={
+    ssid="PSUT"
+    psk="12345678"
+}

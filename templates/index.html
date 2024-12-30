@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Analyzer Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #f0f0f0;
+            background: #1e1e1e;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #00bcd4;
+            animation: fadeInDown 1.5s;
+        }
+
+        .container {
+            background: #2e2e2e;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 700px;
+            animation: zoomIn 1.2s;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 2em;
+            color: #ffcc00;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #d0d0d0;
+        }
+
+        button {
+            background-color: #00bcd4;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #008c9e;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            font-size: 4em;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            animation: bounceIn 1.5s;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounceIn {
+            from, 20%, 40%, 60%, 80%, to {
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <header>
+            <h1>Device Analyzer Tool 🔍 </h1>
+        </header>
+        <div class="container animate__animated animate__fadeInUp">
+            <i class="fas fa-mobile-alt icon animate__animated animate__bounce"></i>
+            <h2>Welcome to Our Graduation Project!</h2>
+            <p>Analyze and compare mobile device data for forensic investigations.</p>
+            <p>Start your analysis by uploading your data!</p>
+            <button onclick="location.href='/upload'">Get Started</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!-- <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .result-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .result-container h3 {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h2>Analysis Results: {{ category.title() }}</h2>
+    
+        {% if category == "contacts" and data.common_numbers %}
+        <h3>Common Contacts</h3>
+        <ul>
+            {% for number in data.common_numbers %}
+            <li>{{ number }}</li>
+            {% endfor %}
+        </ul>
+        {% elif category == "calllogs" and data.common_call_logs %}
+        <h3>Common Call Logs</h3>
+        <ul>
+            {% for log in data.common_call_logs %}
+            <li>{{ log }}</li>
+            {% endfor %}
+        </ul>
+        {% elif category == "wifi" and data.common_wifi %}
+        <h3>Common Wi-Fi Networks</h3>
+        <ul>
+            {% for ssid in data.common_wifi %}
+            <li>{{ ssid }}</li>
+            {% endfor %}
+        </ul>
+        {% elif category == "images" and data.similar_images %}
+        <h3>Similar Images</h3>
+        <ul>
+            {% for pair in data.similar_images %}
+            <li>{{ pair[0] }} - {{ pair[1] }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No results found for {{ category.title() }}.</p>
+        {% endif %}
+    </div>
+    
+    
+    
+    
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background: #f0f0f0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+        }
+
+        .category-title {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Analysis Results</h2>
+        <h3 class="category-title">{{ category|capitalize }}</h3>
+
+        {% if category == 'contacts' %}
+        <h4>Common Contacts</h4>
+        <ul>
+            {% for contact in data.common_numbers %}
+            <li>{{ contact }}</li>
+            {% endfor %}
+        </ul>
+
+        {% elif category == 'calllogs' %}
+        <h4>Common Call Logs</h4>
+        <ul>
+            {% for call in data.common_call_logs %}
+            <li>{{ call }}</li>
+            {% endfor %}
+        </ul>
+
+        {% elif category == 'wifi' %}
+        <h4>Common Wi-Fi Networks</h4>
+        <ul>
+            {% for wifi in data.common_wifi %}
+            <li>{{ wifi }}</li>
+            {% endfor %}
+        </ul>
+
+        {% elif category == 'images' %}
+        <h4>Similar Images</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image 1</th>
+                    <th>Image 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pair in data.similar_images %}
+                <tr>
+                    <td>{{ pair[0] }}</td>
+                    <td>{{ pair[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html> --> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensics Tool - Analysis Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1e1e1e;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px;
+            padding: 40px;
+            background: #2e2e2e;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            overflow: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #ffcc00;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-size: 24px;
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: #333;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #444;
+            color: #f0f0f0;
+        }
+
+        table th {
+            background-color: #00bcd4;
+        }
+
+        table td {
+            background-color: #2e2e2e;
+            transition: background-color 0.3s;
+        }
+
+        table td:hover {
+            background-color: #444;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 300px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+
+        .image-name {
+            text-align: center;
+            margin-top: 10px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .result-container {
+            margin-bottom: 40px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Forensics Tool - Analysis Results</h2>
+
+        <div class="result-container">
+            <h3 class="category-title">{{ category|capitalize }}</h3>
+
+            {% if category == 'contacts' %}
+            <h4>Common Contacts</h4>
+            <ul>
+                {% for contact in data.common_numbers %}
+                <li>{{ contact }}</li>
+                {% endfor %}
+            </ul>
+
+            {% elif category == 'calllogs' %}
+            <h4>Common Call Logs</h4>
+            <ul>
+                {% for call in data.common_call_logs %}
+                <li>{{ call }}</li>
+                {% endfor %}
+            </ul>
+
+            {% elif category == 'wifi' %}
+            <h4>Common Wi-Fi Networks</h4>
+            <ul>
+                {% for wifi in data.common_wifi %}
+                <li>{{ wifi }}</li>
+                {% endfor %}
+            </ul>
+
+            {% elif category == 'images' %}
+            <h4>Similar Images</h4>
+            <div class="image-container">
+                {% for pair in data.similar_images %}
+                <div class="image-pair">
+                    <div class="image">
+                        <img src="{{ url_for('uploaded_file', filename=pair[0]) }}" alt="Image 1">
+                        <div class="image-name">{{ pair[0] }}</div>
+                    </div>
+                    <div class="image">
+                        <img src="{{ url_for('uploaded_file', filename=pair[1]) }}" alt="Image 2">
+                        <div class="image-name">{{ pair[1] }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
